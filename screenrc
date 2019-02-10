@@ -1,0 +1,13 @@
+backtick 101 600 600 hostname -I
+hardstatus string '%{gk}[ %{G}%H %{g}][ %101`][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
+
+hardstatus alwayslastline
+vbell off
+startup_message off
+screen -t bash  1 bash
+screen -t bash  2 bash
+screen -t htop  3 htop
+defscrollback 5000
+# 
+#Change the prefix key to ^Z and make '^Z z' send a literal ^z so as not to interfere with bash's ^a
+escape ^Zz

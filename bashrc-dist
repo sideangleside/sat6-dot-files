@@ -1,0 +1,85 @@
+# .bashrc
+
+# User specific aliases and functions
+
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+alias dstat='dstat -tcndymlp -N total -D total'
+alias rm='rm -Iv'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias df='df -kTh'
+alias ..='cd ..'
+alias mkdir='mkdir -p'
+alias la='ls -al'               # show hidden files
+alias lh='ls -latrhF'           # sort by date (human readable)
+alias ll='ls -l'               # show hidden files
+alias ls='ls -F --color --si'       # add colors for filetype recognition
+alias lx='ls -lXB'              # sort by extension
+alias lk='ls -lSr'              # sort by size
+alias lc='ls -lcr'              # sort by change time  
+alias lu='ls -lur'              # sort by access time   
+alias lr='ls -lR'               # recursive ls
+alias lt='ls -ltr'              # sort by date
+alias lm='ls -al |more'         # pipe through 'more'
+alias lz='ls -lZ'
+alias tree='tree -Csu'          # nice alternative to 'ls'
+alias sd='du --si --max-depth=1 | sort -k2'
+alias df='df -kTH'
+shopt -s extglob        # necessary
+shopt -s cdspell
+shopt -s cdable_vars
+shopt -s checkhash
+shopt -s checkwinsize
+shopt -s mailwarn
+shopt -s sourcepath
+shopt -s cmdhist
+shopt -s histappend histreedit histverify
+
+export HISTFILESIZE=100000000
+export HISTSIZE=100000
+
+# Change the LS_COLORS variable to make the darn directory colors something other than dark blue
+
+export HISTSIZE
+export HISTTIMEFORMAT="%h/%d - %H:%M:%S "
+
+export LS_COLORS='no=00:fi=00:di=00;33:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:'
+
+txtblk='\[\e[0;30m\]' # Black - Regular
+txtred='\[\e[0;31m\]' # Red
+txtgrn='\[\e[0;32m\]' # Green
+txtylw='\[\e[0;33m\]' # Yellow
+txtblu='\[\e[0;34m\]' # Blue
+txtpur='\[\e[0;35m\]' # Purple
+txtcyn='\[\e[0;36m\]' # Cyan
+txtwht='\[\e[0;37m\]' # White
+bldblk='\[\e[1;30m\]' # Black - Bold
+bldred='\[\e[1;31m\]' # Red
+bldgrn='\[\e[1;32m\]' # Green
+bldylw='\[\e[1;33m\]' # Yellow
+bldblu='\[\e[1;34m\]' # Blue
+bldpur='\[\e[1;35m\]' # Purple
+bldcyn='\[\e[1;36m\]' # Cyan
+bldwht='\[\e[1;37m\]' # White
+
+PS1="\n[${bldblu}\u@\H${txtwht}:${txtwht}] ${bldylw}\w ${bldwht}"
+test $UID -eq 0 && PS1=$PS1"#" || PS1=$PS1"$"
+
+tty | grep -qe "tty" && ON_TTY=0 || ON_TTY=1
+
+export PROMPT_COMMAND='history -a;echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
+
+# tailoring 'less'
+which most >/dev/null 2>&1 && {
+        alias more='most'
+        #alias less='most'
+        export PAGER="most"
+} || {
+        alias more='less'
+        export PAGER=less
+}

@@ -1,0 +1,19 @@
+---
+# Foreman Proxy
+foreman_proxy::tls_disabled_versions: ['1.1']
+foreman_proxy::ssl_disabled_ciphers: ['TLS_RSA_WITH_RC4_128_MD5', 'TLS_RSA_WITH_RC4_128_SHA']
+
+# Dynflow
+foreman_proxy::plugin::dynflow::ssl_disabled_ciphers: ['TLS_RSA_WITH_RC4_128_MD5', 'TLS_RSA_WITH_RC4_128_SHA']
+foreman_proxy::plugin::dynflow::tls_disabled_versions: ['1.1']
+
+# Puppet
+puppet::server::passenger::ssl_protocol: 'ALL -SSLv3 -TLSv1 -TLSv1.1 +TLSv1.2'
+puppet::server::passenger::ssl_cipher: '!aNULL:!eNULL:!LOW:!DES:!3DES:!RC4:!MD5:!EXP:!PSK:!SRP:!DSS:!ADH:HIGH'
+
+# Apache
+apache::mod::ssl::ssl_protocol: ['ALL', '-SSLv3', '-TLSv1', '-TLSv1.1', '+TLSv1.2']
+apache::mod::ssl::ssl_cipher: '!aNULL:!eNULL:!LOW:!DES:!3DES:!RC4:!MD5:!EXP:!PSK:!SRP:!DSS:!ADH:HIGH'
+apache::trace_enable: 'Off'
+candlepin::ciphers: ['TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256','TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA']
+candlepin::tls_versions: ['1.2']
